@@ -1,16 +1,11 @@
+const axios = require("axios");
 const router = require("express").Router();
-const articleController = require("../../controllers/articleController");
 
-// Matches with "/api/articles"
-router.route("/")
-  .get(articleController.findAll)
-  .post(articleController.create);
-
-// Matches with "/api/article/:id"
-router
-  .route("/:id")
-  .get(articleController.findById)
-  .put(articleController.update)
-  .delete(articleController.remove);
+router.get("/articles", (req, res) => {
+  axios
+    .get("https://api.nytimes.com/svc/search/v2/articlesearch.json?2e2409f3caab4211ac4063278bb6866a", { params: req.query })
+    .then(({ data: { results } }) => res.json(results))
+    .catch(err => res.status(422).json(err));
+});
 
 module.exports = router;
