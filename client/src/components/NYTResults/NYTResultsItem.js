@@ -8,7 +8,7 @@ export const NYTResultsItem = props => (
       <Row>
         <Col size="xs-8 sm-9">
           <h3>{props.title}</h3>
-          <p>Summary: {props.summary}</p>
+          <p><strong>Summary:</strong> {props.summary}</p>
           <a rel="noreferrer noopener" target="_blank" href={props.href}>Go to Article!</a>
         </Col>
       </Row>

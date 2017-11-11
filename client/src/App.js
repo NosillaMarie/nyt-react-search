@@ -15,7 +15,7 @@ import { Container, Row, Col } from "./components/Grid";
 class App extends Component {
     state = {
         articles: [],
-        articleSearch: ""
+        articleSearch: "",
         // beginYearSearch: "",
         // endYearSearch: ""
     };
@@ -30,8 +30,8 @@ class App extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         API.getArticles(this.state.articleSearch)
-            .then(res => this.setState({ articles: res.data }))
-            .catch(err => console.log(err));
+            .then(res => { this.setState({ articles: res.data })})
+            .catch(err => {console.log(err)});
     };
 
     render() {
@@ -56,13 +56,11 @@ class App extends Component {
          				<Input
          					name="articleSearch"
          					value={this.state.beginYear}
-         					onChange={this.handleInputChange}
          					placeholder="Start Year.."/>
          		<h3>End Year</h3>
          				<Input
          					name="articleSearch"
          					value={this.state.endYear}
-         					onChange={this.handleInputChange}
          					placeholder="End Year..." />
          					  </Col>
                     <Col size="xs-3 sm-2">
@@ -87,11 +85,10 @@ class App extends Component {
                   {this.state.articles.map(article => {
                     return (
                       <NYTResultsItem
-                        key={article.title}
-                        title={article.title}
-                        href={article.href}
-                        ingredients={article.ingredients}
-                        thumbnail={article.thumbnail}
+                        key={article.headline.main}
+                        title={article.headline.main}
+                        summary={article.snippet}
+                        href={article.web_url}
                       />
                     );
                   })}
